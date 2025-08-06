@@ -1,0 +1,30 @@
+h1 {
+  color: #e74c3c; /* Red */
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+}
+
+ul {
+  background: #f8f8f8;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.recipe {
+  background: white;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 600px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+img {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 8px;
+  display: block;
+  margin: 10px auto;
+}
