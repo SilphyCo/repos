@@ -1,53 +1,102 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Mum's Pizza</title>
-    <link rel="stylesheet" href="../styles.css">  <!-- rel means relationship -->
+    <meta charset="UTF-8">
+    <title>Mum's Special Pizza</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: #f8f9fa;
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 700px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+            padding: 32px 40px;
+        }
+        header, footer {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        h1 {
+            color: #d35400;
+            margin-bottom: 8px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 32px;
+        }
+        ul, ol {
+            margin-left: 24px;
+        }
+        img {
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-bottom: 16px;
+        }
+        a {
+            color: #2980b9;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            font-size: 0.95em;
+            color: #888;
+            margin-top: 40px;
+        }
+    </style>
 </head>
 <body>
-    <div class="recipe">
-    <h1>Mum's Special Pizza</h1>
-    <a href="../index.html">Back to Home</a>
-    <p><img src="../recipe-images/pizza.jpg" alt="Mums delicious spaghetti" width="400"></p>
-
-<h2>A delicious & classic plate waiting to be dished to your loved ones</h2>
-<p>No artificial ingredients or pre-made sauces here—just fresh dough, a vibrant medley of vegetables, quality cheese, and herbs come together to create a wholesome, mouthwatering pizza that’s perfect for sharing with family and friends.</p>
-
-<h2>Ingredients</h2>
-<ul>
-    <li>All-purpose flour (for the dough)</li>
-    <li>Active dry yeast</li>
-    <li>Warm water</li>
-    <li>Olive oil</li>
-    <li>Salt</li>
-    <li>Fresh garlic (minced)</li>
-    <li>Fresh tomatoes (diced)</li>
-    <li>Red bell pepper (thinly sliced)</li>
-    <li>Mushrooms (sliced)</li>
-    <li>Red onion (thinly sliced)</li>
-    <li>Fresh basil leaves</li>
-    <li>Mozzarella cheese (shredded)</li>
-    <li>Parmesan cheese (for finishing)</li>
-    <li>Oregano (dried or fresh)</li>
-    <li>Crushed red pepper flakes (optional, for some heat)</li>
-</ul>
-
-<h2>Steps</h2>
-<ol>
-    <li><strong>Prepare the dough:</strong> In a large bowl, dissolve the yeast in warm water and let it sit for 5 minutes until foamy. Add flour, olive oil, and salt. Mix and knead for about 8–10 minutes until smooth and elastic. Cover and let it rise in a warm spot for 1–1.5 hours, until doubled in size.</li>
-    
-    <li><strong>Preheat the oven:</strong> Set your oven to 475°F (245°C). If you have a pizza stone, place it inside to heat.</li>
-    
-    <li><strong>Make the fresh tomato base:</strong> In a bowl, combine diced tomatoes, minced garlic, a pinch of salt, olive oil, and oregano. Let it sit for 10 minutes to let the flavors blend.</li>
-    
-    <li><strong>Shape the dough:</strong> Punch down the risen dough and roll it out on a floured surface into your desired pizza shape and thickness.</li>
-    
-    <li><strong>Assemble the pizza:</strong> Spread the fresh tomato mixture evenly over the dough, leaving a small border for the crust. Layer the sliced red bell peppers, mushrooms, and red onion on top. Sprinkle shredded mozzarella cheese generously over the vegetables. Add a few fresh basil leaves and a pinch of crushed red pepper flakes if you like a little heat.</li>
-    
-    <li><strong>Bake:</strong> Transfer the pizza carefully to the preheated oven or pizza stone. Bake for 12–15 minutes, or until the crust is golden and cheese is bubbly and slightly browned.</li>
-    
-    <li><strong>Finish and serve:</strong> Remove from oven, sprinkle freshly grated Parmesan cheese on top and add extra fresh basil leaves for garnish. Slice and serve hot. Enjoy your homemade classic pizza with loved ones!</li>
-</ol>
-</div>
+    <div class="container">
+        <header>
+            <h1>Mum's Special Pizza</h1>
+            <a href="../index.html">&larr; Back to Home</a>
+        </header>
+        <main>
+            <img src="../recipe-images/pizza.jpg" alt="Mum's delicious homemade pizza" width="400">
+            <h2>A delicious & classic plate waiting to be dished to your loved ones</h2>
+            <p>No artificial ingredients or pre-made sauces here—just fresh dough, a vibrant medley of vegetables, quality cheese, and herbs come together to create a wholesome, mouthwatering pizza that’s perfect for sharing with family and friends.</p>
+            <h2>Ingredients</h2>
+            <ul>
+                <li>All-purpose flour (for the dough)</li>
+                <li>Active dry yeast</li>
+                <li>Warm water</li>
+                <li>Olive oil</li>
+                <li>Salt</li>
+                <li>Fresh garlic (minced)</li>
+                <li>Fresh tomatoes (diced)</li>
+                <li>Red bell pepper (thinly sliced)</li>
+                <li>Mushrooms (sliced)</li>
+                <li>Red onion (thinly sliced)</li>
+                <li>Fresh basil leaves</li>
+                <li>Mozzarella cheese (shredded)</li>
+                <li>Parmesan cheese (for finishing)</li>
+                <li>Oregano (dried or fresh)</li>
+                <li>Crushed red pepper flakes (optional, for some heat)</li>
+            </ul>
+            <h2>Steps</h2>
+            <ol>
+                <li><strong>Prepare the dough:</strong> In a large bowl, dissolve the yeast in warm water and let it sit for 5 minutes until foamy. Add flour, olive oil, and salt. Mix and knead for about 8–10 minutes until smooth and elastic. Cover and let it rise in a warm spot for 1–1.5 hours, until doubled in size.</li>
+                <li><strong>Preheat the oven:</strong> Set your oven to 475°F (245°C). If you have a pizza stone, place it inside to heat.</li>
+                <li><strong>Make the fresh tomato base:</strong> In a bowl, combine diced tomatoes, minced garlic, a pinch of salt, olive oil, and oregano. Let it sit for 10 minutes to let the flavors blend.</li>
+                <li><strong>Shape the dough:</strong> Punch down the risen dough and roll it out on a floured surface into your desired pizza shape and thickness.</li>
+                <li><strong>Assemble the pizza:</strong> Spread the fresh tomato mixture evenly over the dough, leaving a small border for the crust. Layer the sliced red bell peppers, mushrooms, and red onion on top. Sprinkle shredded mozzarella cheese generously over the vegetables. Add a few fresh basil leaves and a pinch of crushed red pepper flakes if you like a little heat.</li>
+                <li><strong>Bake:</strong> Transfer the pizza carefully to the preheated oven or pizza stone. Bake for 12–15 minutes, or until the crust is golden and cheese is bubbly and slightly browned.</li>
+                <li><strong>Finish and serve:</strong> Remove from oven, sprinkle freshly grated Parmesan cheese on top and add extra fresh basil leaves for garnish. Slice and serve hot. Enjoy your homemade classic pizza with loved ones!</li>
+            </ol>
+        </main>
+        <footer>
+            &copy; 2025 Mum's Kitchen. All rights reserved.
+        </footer>
+    </div>
 </body>
 </html>
