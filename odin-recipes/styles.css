@@ -1,12 +1,15 @@
 h1.maintitle {
-  color: #e74c3c; /* Red */
+  color: #e74c3c;
   font-family: 'Arial', sans-serif;
   text-align: center;
+  display: inline-block;
+  background: lightblue;
+  padding: 10px;
 }
 
-h1,h2,h3 {
-  font family: 'Arial', sans-serif;
-  color:#2c3e50;
+h2, h3 {
+  font-family: 'Arial', sans-serif;
+  color: #2c3e50;
   margin-bottom: 15px;
 }
 
@@ -35,6 +38,3 @@ img {
   margin: 10px auto;
 }
 
-* {
-  outline: 2px solid red;
-}
