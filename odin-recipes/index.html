@@ -1,17 +1,54 @@
-<!DOCTYPE html> <!-- doc type declaration aka DOCTYPE, first line of code in every HTML doc. DOCTYPE declaration is an instruction to web browser on what version of HTML the page is written in  -->
+<!DOCTYPE html>
 <html>
 <head>
     <title>Odin Recipes</title>
-    <link rel="stylesheet" href="styles.css">  <!-- this links to relevant css file -->
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body> <!-- all content is written between the body -->
+<body>
     <div class="recipe">
-    <h1 class="maintitle">Odin Recipes Yeeehaw!</h1>
-    <ul>
-        <li><a href="recipes/spaghetti.html">Spaghetti</a></li> <!-- these link to relevant html file -->
-        <li><a href="recipes/pizza.html">Pizza</a></li>
-        <li><a href="recipes/katsu-curry.html">Katsu curry</a></li>
-    </ul>
-</div>
+        <h1 class="maintitle">Odin Recipes Yeeehaw! 🤠</h1>
+        
+        <!-- NEW: Hero Stats -->
+        <div class="recipe-stats">
+            <div class="stat">
+                <h3>Recipes</h3>
+                <p>3</p>
+            </div>
+            <div class="stat">
+                <h3>Difficulty</h3>
+                <p>Easy</p>
+            </div>
+            <div class="stat">
+                <h3>Rating</h3>
+                <p>⭐️⭐️⭐️⭐️⭐️</p>
+            </div>
+        </div>
+
+        <!-- UPDATED: Recipe Cards Layout -->
+        <div class="ingredient-groups">
+            <div class="ingredient-group">
+                <h3>🍝 Spaghetti</h3>
+                <p>Classic Italian comfort food</p>
+                <a href="recipes/spaghetti.html" class="recipe-link">View Recipe →</a>
+            </div>
+            <div class="ingredient-group">
+                <h3>🍕 Pizza</h3>
+                <p>Homemade crispy delight</p>
+                <a href="recipes/pizza.html" class="recipe-link">View Recipe →</a>
+            </div>
+            <div class="ingredient-group">
+                <h3>🍛 Katsu Curry</h3>
+                <p>Japanese crispy perfection</p>
+                <a href="recipes/katsu-curry.html" class="recipe-link">View Recipe →</a>
+            </div>
+        </div>
+
+        <!-- NEW: Footer Stats -->
+        <div class="nutrition-facts">
+            <span>👨‍🍳 Chef: You!</span>
+            <span>⏱️ Ready in: 30min</span>
+            <span>❤️ Family Favorite</span>
+        </div>
+    </div>
 </body>
 </html>
