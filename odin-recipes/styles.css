@@ -42,12 +42,14 @@ img {
 
 /* Recipe Stats - Horizontal Layout */
 .recipe-stats {
+  flex-direction: column;
   display: flex;
-  justify-content: space-around;
   margin: 20px 0;
   padding: 15px;
   background: #f8f9fa;
   border-radius: 8px;
+  justify-content: center;
+  gap: 15px;
 }
 
 .stat {
