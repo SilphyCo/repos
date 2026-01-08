@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rock Paper Scissors</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .game-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 800px;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .game-content {
+            padding: 30px;
+        }
+        
+        .score-board {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            text-align: center;
+            border: 3px solid #e9ecef;
+        }
+        
+        .score-title {
+            color: #495057;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .score-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        
+        .score-human, .score-computer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .score-label {
+            font-size: 1rem;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+        
+        .vs {
+            font-size: 1.5rem;
+            color: #adb5bd;
+        }
+        
+        .controls {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .controls h3 {
+            color: #495057;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .choice-btn {
+            background: white;
+            border: 3px solid;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            font-size: 3.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .choice-btn:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .choice-btn.rock {
+            border-color: #ff6b6b;
+            color: #ff6b6b;
+        }
+        
+        .choice-btn.paper {
+            border-color: #4ecdc4;
+            color: #4ecdc4;
+        }
+        
+        .choice-btn.scissors {
+            border-color: #45b7d1;
+            color: #45b7d1;
+        }
+        
+        .choice-btn:active {
+            transform: translateY(-5px);
+        }
+        
+        .game-output {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            max-height: 300px;
+            overflow-y: auto;
+            border: 2px solid #e9ecef;
+        }
+        
+        .game-output h3 {
+            color: #495057;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .output-messages {
+            line-height: 1.6;
+        }
+        
+        .output-messages p {
+            padding: 10px 15px;
+            margin: 8px 0;
+            background: white;
+            border-radius: 10px;
+            border-left: 4px solid;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .output-messages p.tie {
+            border-left-color: #ffd93d;
+            background: #fff9e6;
+        }
+        
+        .output-messages p.win {
+            border-left-color: #6bcf7f;
+            background: #f0fff4;
+        }
+        
+        .output-messages p.lose {
+            border-left-color: #ff6b6b;
+            background: #fff0f0;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .round-counter {
+            background: #4facfe;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            display: inline-block;
+            margin-top: 10px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+        }
+        
+        .final-result {
+            background: linear-gradient(90deg, #ff9a9e 0%, #fad0c4 100%);
+            color: #495057;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        
+        @media (max-width: 768px) {
+            .choice-btn {
+                width: 100px;
+                height: 100px;
+                font-size: 2.8rem;
+            }
+            
+            .score-display {
+                gap: 20px;
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="header">
+            <h1>🎮 Rock Paper Scissors</h1>
+            <p>Challenge the computer in this classic game of strategy!</p>
+            <div class="round-counter">Round: <span id="roundCount">1</span>/5</div>
+        </div>
+        
+        <div class="game-content">
+            <div class="score-board">
+                <div class="score-title">SCOREBOARD</div>
+                <div class="score-display">
+                    <div class="score-human">
+                        <div id="humanScore">0</div>
+                        <div class="score-label">YOU</div>
+                    </div>
+                    <div class="vs">VS</div>
+                    <div class="score-computer">
+                        <div id="computerScore">0</div>
+                        <div class="score-label">COMPUTER</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="controls">
+                <h3>MAKE YOUR CHOICE</h3>
+                <div class="button-group">
+                    <button class="choice-btn rock" onclick="playRound('rock')">✊</button>
+                    <button class="choice-btn paper" onclick="playRound('paper')">✋</button>
+                    <button class="choice-btn scissors" onclick="playRound('scissors')">✌️</button>
+                </div>
+            </div>
+            
+            <div class="game-output">
+                <h3>📜 GAME LOG</h3>
+                <div class="output-messages" id="output">
+                    <p>Click a button above to start playing! First to 3 wins takes the game! 🏆</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
