@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Playground - Watch the Magic! ✨</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .controls {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            background: #4CAF50;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .danger {
+            background: #f44336;
+        }
+        
+        .warning {
+            background: #ff9800;
+        }
+        
+        .info {
+            background: #2196F3;
+        }
+        
+        #container {
+            background: white;
+            min-height: 300px;
+            border-radius: 10px;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .box {
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            transition: all 0.3s;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100px;
+        }
+        
+        .box:hover {
+            transform: scale(1.05);
+        }
+        
+        .red { background: #FF6B6B; color: white; }
+        .blue { background: #4ECDC4; color: white; }
+        .green { background: #A8E6CF; }
+        .yellow { background: #FFD166; }
+        .purple { background: #C9A8E6; color: white; }
+        
+        .message {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-family: monospace;
+            font-size: 14px;
+            max-height: 200px;
+            overflow-y: auto;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .log-entry {
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .log-entry:last-child {
+            border-bottom: none;
+        }
+        
+        .counter {
+            font-size: 12px;
+            opacity: 0.7;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎮 DOM Playground - Watch the Magic! ✨</h1>
+    
+    <div class="controls">
+        <h2>🎛️ Control Panel</h2>
+        
+        <div class="button-grid">
+            <button id="addBoxBtn">➕ Add Box</button>
+            <button id="addRandomBtn">🎲 Add Random Box</button>
+            <button id="changeColorsBtn">🎨 Change Colors</button>
+            <button id="addTextBtn">📝 Add Text to All</button>
+            <button id="removeLastBtn" class="warning">🗑️ Remove Last</button>
+            <button id="clearAllBtn" class="danger">💥 Clear All</button>
+            <button id="rainbowBtn" class="info">🌈 Rainbow Mode</button>
+            <button id="addInputBtn">📋 Add Input Box</button>
+        </div>
+        
+        <div style="margin-top: 15px;">
+            <label for="boxText">Custom Text:</label>
+            <input type="text" id="boxText" placeholder="Enter box text..." style="padding: 8px; width: 200px;">
+            <button id="addCustomBtn">Add Custom Box</button>
+        </div>
+    </div>
+    
+    <div id="container">
+        <!-- Boxes will appear here magically! -->
+        <div class="box red" data-id="1">
+            Click me!
+            <div class="counter">Clicks: 0</div>
+        </div>
+        <div class="box blue" data-id="2">
+            Click me too!
+            <div class="counter">Clicks: 0</div>
+        </div>
+    </div>
+    
+    <div class="message">
+        <h3>📝 Event Log</h3>
+        <div id="eventLog">
+            <div class="log-entry">🟢 DOM Playground loaded!</div>
+            <div class="log-entry">🔵 Initial boxes created</div>
+        </div>
+    </div>
+    
+
+<script>
+    // ============================================
+    // 1. GET REFERENCES TO IMPORTANT ELEMENTS
+    // ============================================
+    
+    // The container where boxes live
+    const container = document.getElementById('container');
+    
+    // All our buttons
+    const addBoxBtn = document.getElementById('addBoxBtn');
+    const addRandomBtn = document.getElementById('addRandomBtn');
+    const changeColorsBtn = document.getElementById('changeColorsBtn');
+    const addTextBtn = document.getElementById('addTextBtn');
+    const removeLastBtn = document.getElementById('removeLastBtn');
+    const clearAllBtn = document.getElementById('clearAllBtn');
+    const rainbowBtn = document.getElementById('rainbowBtn');
+    const addInputBtn = document.getElementById('addInputBtn');
+    const addCustomBtn = document.getElementById('addCustomBtn');
+    const boxTextInput = document.getElementById('boxText');
+    
+    // The event log
+    const eventLog = document.getElementById('eventLog');
+    
+    // Counter to track boxes
+    let boxCounter = 2; // Starting from 2 since we have 2 initial boxes
+    
+    // Available colors
+    const colors = ['red', 'blue', 'green', 'yellow', 'purple'];
+    const colorNames = {
+        red: '🔴 Red',
+        blue: '🔵 Blue', 
+        green: '🟢 Green',
+        yellow: '🟡 Yellow',
+        purple: '🟣 Purple'
+    };
+    
+    // ============================================
+    // 2. HELPER FUNCTIONS
+    // ============================================
+    
+    // Function to add messages to event log
+    function logEvent(message) {
+        const logEntry = document.createElement('div');
+        logEntry.classList.add('log-entry');
+        logEntry.textContent = `📌 ${new Date().toLocaleTimeString()}: ${message}`;
+        eventLog.appendChild(logEntry);
+        eventLog.scrollTop = eventLog.scrollHeight; // Auto-scroll to bottom
+    }
+    
+    // Function to create a new box
+    function createBox(color = 'red', text = 'New Box') {
+        boxCounter++;
+        
+        // CREATE the box element
+        const box = document.createElement('div');
+        
+        // ADD classes and attributes
+        box.classList.add('box', color);
+        box.setAttribute('data-id', boxCounter);
+        
+        // ADD content
+        box.innerHTML = `
+            ${text}
+            <div class="counter">Clicks: 0</div>
+        `;
+        
+        // ADD click event to the box
+        let clickCount = 0;
+        box.addEventListener('click', function() {
+            clickCount++;
+            this.querySelector('.counter').textContent = `Clicks: ${clickCount}`;
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 150);
+            
+            logEvent(`Box #${this.getAttribute('data-id')} clicked (${clickCount} times)`);
+        });
+        
+        // ADD double-click to remove
+        box.addEventListener('dblclick', function() {
+            this.remove();
+            logEvent(`Box #${this.getAttribute('data-id')} removed (double-clicked)`);
+        });
+        
+        return box;
+    }
+    
+    // Function to get random color
+    function getRandomColor() {
+        return colors[Math.floor(Math.random() * colors.length)];
+    }
+    
+    // ============================================
+    // 3. BUTTON EVENT LISTENERS
+    // ============================================
+    
+    // Button 1: Add a red box
+    addBoxBtn.addEventListener('click', function() {
+        const box = createBox('red', 'Red Box');
+        container.appendChild(box);
+        logEvent('Added a red box');
+    });
+    
+    // Button 2: Add random colored box
+    addRandomBtn.addEventListener('click', function() {
+        const randomColor = getRandomColor();
+        const box = createBox(randomColor, `${colorNames[randomColor]} Box`);
+        container.appendChild(box);
+        logEvent(`Added a ${randomColor} box`);
+    });
+    
+    // Button 3: Change colors of ALL boxes
+    changeColorsBtn.addEventListener('click', function() {
+        const boxes = document.querySelectorAll('.box');
+        
+        boxes.forEach(box => {
+            // Remove all color classes
+            box.classList.remove('red', 'blue', 'green', 'yellow', 'purple');
+            // Add random color
+            const newColor = getRandomColor();
+            box.classList.add(newColor);
+            box.querySelector('div:first-child').textContent = `${colorNames[newColor]} Box`;
+        });
+        
+        logEvent(`Changed colors of ${boxes.length} boxes`);
+    });
+    
+    // Button 4: Add text to all boxes
+    addTextBtn.addEventListener('click', function() {
+        const boxes = document.querySelectorAll('.box');
+        const texts = ['Hello!', 'DOM is fun!', 'Click me!', 'JavaScript!', 'Web Dev!'];
+        
+        boxes.forEach((box, index) => {
+            const randomText = texts[Math.floor(Math.random() * texts.length)];
+            box.querySelector('div:first-child').textContent = `${randomText} #${index + 1}`;
+        });
+        
+        logEvent(`Updated text on ${boxes.length} boxes`);
+    });
+    
+    // Button 5: Remove last box
+    removeLastBtn.addEventListener('click', function() {
+        const lastBox = container.lastElementChild;
+        if (lastBox) {
+            lastBox.remove();
+            logEvent('Removed last box');
+        } else {
+            logEvent('No boxes to remove!');
+        }
+    });
+    
+    // Button 6: Clear ALL boxes
+    clearAllBtn.addEventListener('click', function() {
+        // Method 1: Clear innerHTML (fast but loses events)
+        // container.innerHTML = '';
+        
+        // Method 2: Remove each child (keeps code clean)
+        while (container.firstChild) {
+            container.removeChild(container.firstChild);
+        }
+        
+        logEvent('Cleared all boxes!');
+    });
+    
+    // Button 7: Rainbow mode - add boxes with all colors
+    rainbowBtn.addEventListener('click', function() {
+        colors.forEach((color, index) => {
+            setTimeout(() => {
+                const box = createBox(color, `${colorNames[color]} Rainbow`);
+                container.appendChild(box);
+                logEvent(`Added ${color} rainbow box`);
+            }, index * 200); // Stagger the creation
+        });
+    });
+    
+    // Button 8: Add input box
+    addInputBtn.addEventListener('click', function() {
+        const box = document.createElement('div');
+        box.classList.add('box', 'yellow');
+        box.setAttribute('data-id', ++boxCounter);
+        
+        box.innerHTML = `
+            <input type="text" placeholder="Type something..." 
+                   style="width: 80%; padding: 5px; border: 1px solid #ccc; border-radius: 3px;">
+            <div class="counter" style="margin-top: 10px;">Text: </div>
+        `;
+        
+        const input = box.querySelector('input');
+        const counter = box.querySelector('.counter');
+        
+        input.addEventListener('input', function() {
+            counter.textContent = `Text: ${this.value}`;
+        });
+        
+        container.appendChild(box);
+        logEvent('Added input box');
+    });
+    
+    // Button 9: Add custom box with user text
+    addCustomBtn.addEventListener('click', function() {
+        const userText = boxTextInput.value.trim() || 'Custom Box';
+        const randomColor = getRandomColor();
+        const box = createBox(randomColor, userText);
+        container.appendChild(box);
+        
+        // Clear input
+        boxTextInput.value = '';
+        
+        logEvent(`Added custom box: "${userText}"`);
+    });
+    
+    // Also allow pressing Enter in the input
+    boxTextInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            addCustomBtn.click();
+        }
+    });
+    
+    // ============================================
+    // 4. INITIAL SETUP
+    // ============================================
+    
+    // Add click events to initial boxes
+    document.querySelectorAll('.box').forEach(box => {
+        let clickCount = 0;
+        box.addEventListener('click', function() {
+            clickCount++;
+            this.querySelector('.counter').textContent = `Clicks: ${clickCount}`;
+            logEvent(`Initial box clicked (${clickCount} times)`);
+        });
+    });
+    
+    // Initial log
+    logEvent('DOM Playground ready! Try the buttons above.');
+    
+    // ============================================
+    // 5. BONUS: KEYBOARD SHORTCUTS
+    // ============================================
+    
+    document.addEventListener('keydown', function(e) {
+        switch(e.key) {
+            case 'a':
+            case 'A':
+                addBoxBtn.click();
+                logEvent('Shortcut: Added box (A key)');
+                break;
+            case 'r':
+            case 'R':
+                addRandomBtn.click();
+                logEvent('Shortcut: Added random box (R key)');
+                break;
+            case 'c':
+            case 'C':
+                clearAllBtn.click();
+                logEvent('Shortcut: Cleared all (C key)');
+                break;
+            case ' ':
+                // Space bar for rainbow
+                rainbowBtn.click();
+                logEvent('Shortcut: Rainbow mode (Space bar)');
+                break;
+        }
+    });
+    
+    // Log that shortcuts are available
+    logEvent('🎹 Keyboard shortcuts: A=Add, R=Random, C=Clear, Space=Rainbow');
+</script>
+</body>
+</html>
